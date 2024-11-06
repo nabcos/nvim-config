@@ -9,6 +9,7 @@
   [{:name :nvim_lsp}
    {:name :conjure}
    {:name :buffer}
+   {:name :orgmode}
    {:name :vsnip}
    {:name :luasnip}])
 
