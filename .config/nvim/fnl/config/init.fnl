@@ -29,4 +29,30 @@
   (each [option value (pairs options)]
     (core.assoc vim.o option value)))
 
+(vim.keymap.set :n :k "v:count == 0 ? 'gk' : 'k'" { :expr true :silent true })
+(vim.keymap.set :n :j "v:count == 0 ? 'gj' : 'j'" { :expr true :silent true })
+
+-- rewrite file as root
+(vim.keymap.set :c :w!! "%!sudo tee >/dev/null %<cr>" { :desc "Re[w]rite file as root" })
+
+(vim.keymap.set :n :<A-j> ":m .+1<CR>==" {:desc  "move lines down"}) ;; move line up(n)
+(vim.keymap.set :n :<A-k> ":m .-2<CR>==" {:desc  "move lines up"}) ;; move line down(n)
+(vim.keymap.set :v :<A-j> ":m '>+1<CR>gv=gv" {:desc  "move lines down"}) ;; move line up(v)
+(vim.keymap.set :v :<A-k> ":m '<-2<CR>gv=gv" {:desc  "move lines up"}) ;; move line down(v)
+
+; These mappings control the size of splits (height/width)
+(vim.keymap.set :n :<M-t> "<c-w>5<")
+(vim.keymap.set :n :<M-s> "<c-w>5>")
+(vim.keymap.set :n "<M-,>" "<C-W>+")
+(vim.keymap.set :n "<M-.>" "<C-W>-")
+(vim.keymap.set :n :<tab> "za" { :desc  "Toggle fold" })
+
+
+(vim.api.nvim_create_autocmd "FileType" {
+  :pattern [ "markdown" ]
+  :callback (fn []
+    (vim.keymap.set :i :<esc> "<esc>:update<cr>")
+    )
+})
+
 {}
