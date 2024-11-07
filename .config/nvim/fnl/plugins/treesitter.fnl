@@ -15,4 +15,8 @@
                                                     :json
                                                     :lua
                                                     :markdown
-                                                    :yaml]})))}]
+                                                    :yaml
+                                                    :nix
+                                                    :python
+                                                    :go
+                                                    ]})))}]
