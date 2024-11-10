@@ -25,14 +25,15 @@
        ;show line and column number
        :ruler true
        ;makes signcolumn always one column with signs and linenumber
-       :signcolumn "number"}]
+       :signcolumn "yes"
+       :autoindent true}]
   (each [option value (pairs options)]
     (core.assoc vim.o option value)))
 
 (vim.keymap.set :n :k "v:count == 0 ? 'gk' : 'k'" { :expr true :silent true })
 (vim.keymap.set :n :j "v:count == 0 ? 'gj' : 'j'" { :expr true :silent true })
 
--- rewrite file as root
+;; rewrite file as root
 (vim.keymap.set :c :w!! "%!sudo tee >/dev/null %<cr>" { :desc "Re[w]rite file as root" })
 
 (vim.keymap.set :n :<A-j> ":m .+1<CR>==" {:desc  "move lines down"}) ;; move line up(n)
