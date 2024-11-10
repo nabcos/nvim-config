@@ -18,5 +18,4 @@
                                                     :yaml
                                                     :nix
                                                     :python
-                                                    :go
-                                                    ]})))}]
+                                                    :go]})))}]

@@ -1,3 +1,1 @@
-[{1 :lucidph3nx/nvim-sops
-  :event [ :BufEnter ] 
-  }]
+[{1 :lucidph3nx/nvim-sops :event [:BufEnter]}]
