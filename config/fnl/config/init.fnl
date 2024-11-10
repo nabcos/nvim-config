@@ -25,7 +25,10 @@
                :ruler true
                ;makes signcolumn always one column with signs and linenumber
                :signcolumn :yes
-               :autoindent true}]
+               ;indent on new line as well
+               :autoindent true
+               ;save undo history
+               :undofile true}]
   (each [option value (pairs options)]
     (core.assoc vim.o option value)))
 
