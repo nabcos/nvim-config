@@ -95,6 +95,14 @@
                                                              ":lua require('telescope.builtin').diagnostics()<cr>"
                                                              {:noremap true})
                                 (vim.api.nvim_buf_set_keymap bufnr :n
+                                                             :<leader>lD
+                                                             ":lua require('telescope.builtin').lsp_document_symbols()<cr>"
+                                                             {:noremap true})
+                                (vim.api.nvim_buf_set_keymap bufnr :n
+                                                             :<leader>lW
+                                                             ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>"
+                                                             {:noremap true})
+                                (vim.api.nvim_buf_set_keymap bufnr :n
                                                              :<leader>lr
                                                              ":lua require('telescope.builtin').lsp_references()<cr>"
                                                              {:noremap true})
