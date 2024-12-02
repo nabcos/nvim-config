@@ -41,7 +41,7 @@
                                     :<C-Space> (cmp.mapping.complete)
                                     :<C-e> (cmp.mapping.close)
                                     :<A-CR> (cmp.mapping.confirm {:behavior cmp.ConfirmBehavior.Insert
-                                                                :select true})
+                                                                  :select true})
                                     :<Tab> (cmp.mapping (fn [fallback]
                                                           (if (cmp.visible)
                                                               (cmp.select_next_item)
