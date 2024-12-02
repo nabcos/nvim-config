@@ -8,6 +8,7 @@
               (orgmode.setup {:org_agenda_files "~/orgfiles/**/*"
                               :org_default_notes_file "~/orgfiles/refile.org"
                               :org_adapt_indentation true
+                              :mappings {:org_return_uses_meta_return true}
                               :org_capture_templates {:t {:description :Todo
                                                           :template "* TODO %?
 DEADLINE: %T"}
