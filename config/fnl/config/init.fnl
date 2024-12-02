@@ -60,7 +60,7 @@
 (vim.keymap.set :n :<tab> :za {:desc "Toggle fold"})
 
 (vim.api.nvim_create_autocmd :FileType
-                             {:pattern [:markdown]
+                             {:pattern [:markdown :org]
                               :callback (fn []
                                           (vim.keymap.set :i :<esc>
                                                           "<esc>:update<cr>"))})

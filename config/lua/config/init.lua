@@ -24,5 +24,5 @@ vim.keymap.set("n", "<tab>", "za", {desc = "Toggle fold"})
 local function _2_()
   return vim.keymap.set("i", "<esc>", "<esc>:update<cr>")
 end
-vim.api.nvim_create_autocmd("FileType", {pattern = {"markdown"}, callback = _2_})
+vim.api.nvim_create_autocmd("FileType", {pattern = {"markdown", "org"}, callback = _2_})
 return {}
