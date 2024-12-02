@@ -66,6 +66,7 @@ local function _1_()
   setupLspServer = _5_
   mason_lspconfig.setup_handlers({setupLspServer})
   lsp.lemminx.setup({on_attach = on_attach, capabilities = capabilities})
+  setupLspServer("fennel_ls", {})
   setupLspServer("marksman", {})
   setupLspServer("terraform_lsp", {})
   setupLspServer("gopls", {})

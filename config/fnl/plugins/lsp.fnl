@@ -146,6 +146,7 @@
                          (server.setup {: on_attach : capabilities : settings}))))
               (mason-lspconfig.setup_handlers [setupLspServer])
               (lsp.lemminx.setup {: on_attach : capabilities})
+              (setupLspServer :fennel_ls {})
               (setupLspServer :marksman {})
               (setupLspServer :terraform_lsp {})
               (setupLspServer :gopls {})
