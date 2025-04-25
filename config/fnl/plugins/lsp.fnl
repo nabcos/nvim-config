@@ -148,7 +148,7 @@
               (lsp.lemminx.setup {: on_attach : capabilities})
               (setupLspServer :fennel_ls {})
               (setupLspServer :marksman {})
-              (setupLspServer :terraform_lsp {})
+              (setupLspServer :terraformls {})
               (setupLspServer :gopls {})
               (setupLspServer :lua_ls
                               {:Lua {:workspace {:checkThirdParty false}
