@@ -25,4 +25,12 @@ local function _2_()
   return vim.keymap.set("i", "<esc>", "<esc>:update<cr>")
 end
 vim.api.nvim_create_autocmd("FileType", {pattern = {"markdown", "org"}, callback = _2_})
+local function _3_()
+  if ((vim.fn.line("'\"") > 1) and (vim.fn.line("'\"") <= vim.fn.line("$"))) then
+    return vim.api.nvim_exec2("normal! g'\"", {output = false})
+  else
+    return nil
+  end
+end
+vim.api.nvim_create_autocmd("BufReadPost", {pattern = {"*"}, callback = _3_})
 return {}
