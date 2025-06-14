@@ -67,13 +67,11 @@
 
 (vim.api.nvim_create_autocmd :BufReadPost
                              {:pattern ["*"]
-                              :callback (fn []
-                                            ; when last position > 1 and less than total lines
+                              :callback (fn [] ; when last position > 1 and less than total lines
                                           (when (and (> (vim.fn.line "'\"") 1)
                                                      (<= (vim.fn.line "'\"")
                                                          (vim.fn.line "$")))
                                             (vim.api.nvim_exec2 "normal! g'\""
-                                                                {:output false})
-                                            ))})
+                                                                {:output false})))})
 
 {}
