@@ -38,4 +38,5 @@
                                                                :--hidden]}
                                 :extensions {:ui-select {1 (themes.get_dropdown {})}}})
               (telescope.load_extension :ui-select)
+              (telescope.load_extension :projects)
               (telescope.load_extension :fzf)))}]
