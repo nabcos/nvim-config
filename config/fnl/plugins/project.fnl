@@ -2,8 +2,7 @@
   :init (fn []
           (vim.keymap.set :n :<leader>gp
                           ":lua require('telescope').extensions.projects.projects()<CR>"
-                          {:noremap true})
-          )
+                          {:noremap true}))
   :config (fn []
-            (let [plugin (require :project_nvim)] 
+            (let [plugin (require :project_nvim)]
               (plugin.setup {})))}]

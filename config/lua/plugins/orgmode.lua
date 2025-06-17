@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/plugins/orgmode.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/plugins/orgmode.fnl
 local function _1_()
   local orgmode = require("orgmode")
   local bullets = require("org-bullets")

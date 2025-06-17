@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/plugins/project.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/plugins/project.fnl
 local function _1_()
   return vim.keymap.set("n", "<leader>gp", ":lua require('telescope').extensions.projects.projects()<CR>", {noremap = true})
 end

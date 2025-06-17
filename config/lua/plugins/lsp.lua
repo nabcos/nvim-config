@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/plugins/lsp.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/plugins/lsp.fnl
 local function define_signs(prefix)
   local error = (prefix .. "SignError")
   local warn = (prefix .. "SignWarn")
@@ -64,13 +64,13 @@ local function _1_()
     return server.setup({on_attach = on_attach, capabilities = capabilities, settings = settings})
   end
   setupLspServer = _5_
-  mason_lspconfig.setup_handlers({setupLspServer})
   lsp.lemminx.setup({on_attach = on_attach, capabilities = capabilities})
   setupLspServer("fennel_ls", {})
   setupLspServer("marksman", {})
   setupLspServer("terraformls", {})
   setupLspServer("gopls", {})
   setupLspServer("lua_ls", {Lua = {workspace = {checkThirdParty = false}, telemetry = {enable = false}}})
-  return setupLspServer("nil_ls", {["nil"] = {formatting = {command = {"nixpkgs-fmt"}}}, nix = {maxMemoryMB = 2560, flake = {autoArchive = "true", nixpkgsInputName = "nixos"}}})
+  setupLspServer("nil_ls", {["nil"] = {formatting = {command = {"nixpkgs-fmt"}}}, nix = {maxMemoryMB = 2560, flake = {autoArchive = "true", nixpkgsInputName = "nixos"}}})
+  return mason_lspconfig.setup_handlers({setupLspServer})
 end
 return {{"neovim/nvim-lspconfig", dependencies = {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim", "j-hui/fidget.nvim", "folke/neodev.nvim"}, config = _1_}}

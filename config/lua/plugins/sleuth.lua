@@ -1,2 +1,2 @@
--- [nfnl] Compiled from fnl/plugins/sleuth.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/plugins/sleuth.fnl
 return {{"tpope/vim-sleuth"}}

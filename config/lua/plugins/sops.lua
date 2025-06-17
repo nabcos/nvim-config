@@ -1,2 +1,2 @@
--- [nfnl] Compiled from fnl/plugins/sops.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/plugins/sops.fnl
 return {{"lucidph3nx/nvim-sops", event = {"BufEnter"}}}

@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/plugins/paredit.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/plugins/paredit.fnl
 local function _1_()
   local paredit = require("nvim-paredit")
   return paredit.setup()
