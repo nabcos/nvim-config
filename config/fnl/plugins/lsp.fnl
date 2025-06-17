@@ -12,29 +12,14 @@
 (define-signs :Diagnostic)
 
 [{1 :neovim/nvim-lspconfig
-  :dependencies [:williamboman/mason.nvim
-                 :williamboman/mason-lspconfig.nvim
-                 :j-hui/fidget.nvim
-                 :folke/neodev.nvim]
+  :dependencies [:j-hui/fidget.nvim
+                 {1 :folke/lazydev.nvim :ft [:lua]}]
   :config (fn []
             (let [lsp (require :lspconfig)
                   cmplsp (require :cmp_nvim_lsp)
-                  neodev (require :neodev)
-                  mason (require :mason)
-                  mason-lspconfig (require :mason-lspconfig)
-                  handlers {:textDocument/publishDiagnostics (vim.lsp.with vim.lsp.diagnostic.on_publish_diagnostics
-                                                               {:severity_sort true
-                                                                :update_in_insert true
-                                                                :underline true
-                                                                :virtual_text false})
-                            :textDocument/hover (vim.lsp.with vim.lsp.handlers.hover
-                                                  {:border :single})
-                            :textDocument/signatureHelp (vim.lsp.with vim.lsp.handlers.signature_help
-                                                          {:border :single})}
+                  neodev (require :lazydev)
                   capabilities (cmplsp.default_capabilities (vim.lsp.protocol.make_client_capabilities))
-                  before_init (fn [params]
-                                (set params.workDoneToken :1))
-                  on_attach (fn [client bufnr]
+                  on_attach (fn [_ bufnr]
                               (do
                                 (vim.api.nvim_buf_set_keymap bufnr :n :gd
                                                              "<Cmd>lua vim.lsp.buf.definition()<CR>"
@@ -118,38 +103,15 @@
               ;nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
               ;nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
               ;nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-              ;; To add support to more language servers check:
-              ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-              ;; Clojure
-              (lsp.clojure_lsp.setup {: on_attach
-                                      : handlers
-                                      : before_init
-                                      : capabilities
-                                      ; uses fallback when navigating inside dependency jar
-                                      :root_dir (fn [pattern]
-                                                  (let [util (require :lspconfig.util)
-                                                        fallback (vim.loop.cwd)
-                                                        patterns [:project.clj
-                                                                  :deps.edn
-                                                                  :build.boot
-                                                                  :shadow-cljs.edn
-                                                                  :.git
-                                                                  :bb.edn]
-                                                        root ((util.root_pattern patterns) pattern)]
-                                                    (or root fallback)))})
               (neodev.setup)
-              (mason.setup)
-              (mason-lspconfig.setup)
               (local setupLspServer
                      (fn [server_name settings]
                        (let [server (. lsp server_name)]
                          (server.setup {: on_attach : capabilities : settings}))))
-              (mason-lspconfig.setup_handlers [setupLspServer])
               (lsp.lemminx.setup {: on_attach : capabilities})
               (setupLspServer :fennel_ls {})
               (setupLspServer :marksman {})
               (setupLspServer :terraformls {})
-              (setupLspServer :gopls {})
               (setupLspServer :lua_ls
                               {:Lua {:workspace {:checkThirdParty false}
                                      :telemetry {:enable false}}})

@@ -13,19 +13,10 @@ define_signs("Diagnostic")
 local function _1_()
   local lsp = require("lspconfig")
   local cmplsp = require("cmp_nvim_lsp")
-  local neodev = require("neodev")
-  local mason = require("mason")
-  local mason_lspconfig = require("mason-lspconfig")
-  local handlers = {["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {severity_sort = true, update_in_insert = true, underline = true, virtual_text = false}), ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = "single"}), ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = "single"})}
+  local neodev = require("lazydev")
   local capabilities = cmplsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
-  local before_init
-  local function _2_(params)
-    params.workDoneToken = "1"
-    return nil
-  end
-  before_init = _2_
   local on_attach
-  local function _3_(client, bufnr)
+  local function _2_(_, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {noremap = true})
     vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", {noremap = true})
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", {desc = "Signature Documentation"})
@@ -46,31 +37,19 @@ local function _1_()
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lr", ":lua require('telescope.builtin').lsp_references()<cr>", {noremap = true})
     return vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>li", ":lua require('telescope.builtin').lsp_implementations()<cr>", {noremap = true})
   end
-  on_attach = _3_
-  local function _4_(pattern)
-    local util = require("lspconfig.util")
-    local fallback = vim.loop.cwd()
-    local patterns = {"project.clj", "deps.edn", "build.boot", "shadow-cljs.edn", ".git", "bb.edn"}
-    local root = util.root_pattern(patterns)(pattern)
-    return (root or fallback)
-  end
-  lsp.clojure_lsp.setup({on_attach = on_attach, handlers = handlers, before_init = before_init, capabilities = capabilities, root_dir = _4_})
+  on_attach = _2_
   neodev.setup()
-  mason.setup()
-  mason_lspconfig.setup()
   local setupLspServer
-  local function _5_(server_name, settings)
+  local function _3_(server_name, settings)
     local server = lsp[server_name]
     return server.setup({on_attach = on_attach, capabilities = capabilities, settings = settings})
   end
-  setupLspServer = _5_
+  setupLspServer = _3_
   lsp.lemminx.setup({on_attach = on_attach, capabilities = capabilities})
   setupLspServer("fennel_ls", {})
   setupLspServer("marksman", {})
   setupLspServer("terraformls", {})
-  setupLspServer("gopls", {})
   setupLspServer("lua_ls", {Lua = {workspace = {checkThirdParty = false}, telemetry = {enable = false}}})
-  setupLspServer("nil_ls", {["nil"] = {formatting = {command = {"nixpkgs-fmt"}}}, nix = {maxMemoryMB = 2560, flake = {autoArchive = "true", nixpkgsInputName = "nixos"}}})
-  return mason_lspconfig.setup_handlers({setupLspServer})
+  return setupLspServer("nil_ls", {["nil"] = {formatting = {command = {"nixpkgs-fmt"}}}, nix = {maxMemoryMB = 2560, flake = {autoArchive = "true", nixpkgsInputName = "nixos"}}})
 end
-return {{"neovim/nvim-lspconfig", dependencies = {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim", "j-hui/fidget.nvim", "folke/neodev.nvim"}, config = _1_}}
+return {{"neovim/nvim-lspconfig", dependencies = {"j-hui/fidget.nvim", {"folke/lazydev.nvim", ft = {"lua"}}}, config = _1_}}
