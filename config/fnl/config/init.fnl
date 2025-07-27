@@ -61,9 +61,9 @@
 
 (vim.api.nvim_create_autocmd :FileType
                              {:pattern [:markdown :org]
-                              :callback (fn []
-                                          (vim.keymap.set :i :<esc>
-                                                          "<esc>:update<cr>"))})
+                              :callback (fn [evt]
+                                          (vim.api.nvim_buf_set_keymap evt.buf :i :<esc>
+                                                          "<esc>:update<cr>" {}))})
 
 (vim.api.nvim_create_autocmd :BufReadPost
                              {:pattern ["*"]

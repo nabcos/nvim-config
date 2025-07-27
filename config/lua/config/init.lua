@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/config/init.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/config/init.fnl
 local _local_1_ = require("nfnl.module")
 local autoload = _local_1_["autoload"]
 local core = autoload("nfnl.core")
@@ -21,8 +21,8 @@ vim.keymap.set("n", "<M-s>", "<c-w>5>")
 vim.keymap.set("n", "<M-,>", "<C-W>+")
 vim.keymap.set("n", "<M-.>", "<C-W>-")
 vim.keymap.set("n", "<tab>", "za", {desc = "Toggle fold"})
-local function _2_()
-  return vim.keymap.set("i", "<esc>", "<esc>:update<cr>")
+local function _2_(evt)
+  return vim.api.nvim_buf_set_keymap(evt.buf, "i", "<esc>", "<esc>:update<cr>", {})
 end
 vim.api.nvim_create_autocmd("FileType", {pattern = {"markdown", "org"}, callback = _2_})
 local function _3_()
