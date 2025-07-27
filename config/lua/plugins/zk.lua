@@ -17,6 +17,7 @@ local function _1_()
       vim.api.nvim_set_keymap("n", "<leader>zb", "<Cmd>ZkBacklinks<CR>", opts)
       vim.api.nvim_set_keymap("n", "<leader>zl", "<Cmd>ZkLinks<CR>", opts)
       vim.api.nvim_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+      vim.api.nvim_set_keymap("v", "<leader>zl", ":'<,'>ZkInsertLinkAtSelection<CR>", opts)
       return vim.api.nvim_set_keymap("v", "<leader>za", ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", opts)
     else
       return nil

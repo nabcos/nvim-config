@@ -57,6 +57,10 @@
                                                                                        "<Cmd>lua vim.lsp.buf.hover()<CR>"
                                                                                        opts)
                                                               (vim.api.nvim_set_keymap :v
+                                                                                       :<leader>zl
+                                                                                       ":'<,'>ZkInsertLinkAtSelection<CR>"
+                                                                                       opts)
+                                                              (vim.api.nvim_set_keymap :v
                                                                                        :<leader>za
                                                                                        ":'<,'>lua vim.lsp.buf.range_code_action()<CR>"
                                                                                        opts))))}))))}]
