@@ -2,7 +2,7 @@
 local function _1_()
   local zk = require("zk")
   local opts = {noremap = true, silent = false}
-  zk.setup({picker = "telescope", lsp = {config = {name = "zk", cmd = {"zk", "lsp"}, filetypes = {"markdown"}}}, auto_attach = {enabled = true}})
+  zk.setup({picker = "telescope", lsp = {config = {name = "zk", cmd = {"zk", "lsp"}, filetypes = {"markdown"}, root_dir = os.getenv("ZK_NOTEBOOK_DIR")}}, auto_attach = {enabled = true}})
   vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opts)
   vim.api.nvim_set_keymap("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", opts)
   vim.api.nvim_set_keymap("n", "<leader>zf", "<Cmd>ZkNotes { sort = { 'modified'), match = { vim.fn.input('Search: ') } } }<CR>", opts)
