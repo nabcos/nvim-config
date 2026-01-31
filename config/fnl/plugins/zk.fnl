@@ -17,7 +17,7 @@
                                          "<Cmd>ZkNotes { sort = { 'modified' } }<CR>"
                                          opts)
                 (vim.api.nvim_set_keymap :n :<leader>zf
-                                         "<Cmd>ZkNotes { sort = { 'modified'), match = { vim.fn.input('Search: ') } } }<CR>"
+                                         "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>"
                                          opts)
                 (vim.api.nvim_set_keymap :n :<leader>zt :<Cmd>ZkTags<CR> opts)
                 (vim.api.nvim_set_keymap :v :<leader>zf ":'<,'>ZkMatch<CR>"
